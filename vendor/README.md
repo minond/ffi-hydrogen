@@ -1,0 +1,2 @@
+- `libhydrogen` was downloaded from https://github.com/jedisct1/libhydrogen at this sha: 39eb529905.
+- `stringencoders` was downloaded from https://github.com/client9/stringencoders at this sha: e1448a9415.
