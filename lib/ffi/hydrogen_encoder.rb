@@ -25,18 +25,56 @@ module FFI
     #                             const uint8_t key[hydro_secretbox_KEYBYTES])
     attach_function :_hydro_secretbox_decrypt, :hydro_secretbox_decrypt, [:pointer, :pointer, :size_t, :uint64, :pointer, :pointer], :int32
 
-    def self.hydro_secretbox_keygen
-      key = nil
+    # size_t modp_b64_encode(char* dest, const char* str, size_t len)
+    attach_function :_modp_b64_encode, :modp_b64_encode, [:pointer, :pointer, :size_t], :size_t
 
-      ::FFI::MemoryPointer.new(:char, KEYBYTES) do |buff|
-        ::FFI::HydrogenEncoder._hydro_secretbox_keygen(buff)
-        key = buff.get_bytes(0, KEYBYTES)
+    # size_t modp_b64_decode(char* dest, const char* src, size_t len)
+    attach_function :_modp_b64_decode, :modp_b64_decode, [:pointer, :pointer, :size_t], :size_t
+
+    def self.modp_b64_encode(text)
+      encoded = nil
+      text_len = text.bytesize
+      buff_len = modp_b64_encode_len(text_len)
+
+      prep_string_and_buffer(text, buff_len) do |text_ptr, buff_ptr|
+        size = ::FFI::HydrogenEncoder._modp_b64_encode(buff_ptr, text, text_len)
+        encoded = buff_ptr.get_bytes(0, size)
       end
 
-      key
+      encoded
     end
 
-    class Manager
+    def self.modp_b64_decode(text)
+      decoded = nil
+      text_len = text.bytesize
+      buff_len = modp_b64_decode_len(text_len)
+
+      prep_string_and_buffer(text, buff_len) do |text_ptr, buff_ptr|
+        size = ::FFI::HydrogenEncoder._modp_b64_decode(buff_ptr, text, text_len)
+        decoded = buff_ptr.get_bytes(0, size)
+      end
+
+      decoded
+    end
+
+    def self.prep_string_and_buffer(text, buff_size)
+      ::FFI::MemoryPointer.new(:char, buff_size) do |buff_ptr|
+        ::FFI::MemoryPointer.new(:char, text.bytesize) do |text_ptr|
+          text_ptr.put_bytes(0, text)
+          yield(text_ptr, buff_ptr)
+        end
+      end
+    end
+
+    def self.modp_b64_encode_len(len)
+      ((len + 2) / 3 * 4 + 1)
+    end
+
+    def self.modp_b64_decode_len(len)
+      (len / 4 * 3 + 2)
+    end
+
+    class Secretbox
       def initialize(context, key)
         @context_ptr = ::FFI::MemoryPointer.new(:char, context.bytesize)
         @context_ptr.put_bytes(0, context)
@@ -51,6 +89,17 @@ module FFI
       def decrypt(text)
         ::FFI::HydrogenEncoder.hydro_secretbox_decrypt(text, @context_ptr, @key_ptr)
       end
+    end
+
+    def self.hydro_secretbox_keygen
+      key = nil
+
+      ::FFI::MemoryPointer.new(:char, KEYBYTES) do |buff|
+        ::FFI::HydrogenEncoder._hydro_secretbox_keygen(buff)
+        key = buff.get_bytes(0, KEYBYTES)
+      end
+
+      key
     end
 
     def self.hydro_secretbox_encrypt(text, context, key)
