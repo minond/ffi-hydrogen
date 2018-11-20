@@ -1,5 +1,5 @@
 /**
- * \file modp_b64.c
+ * \file modp_b64w.c
  * <PRE>
  * MODP_B64 - High performance base64 encoder/decoder
  * https://github.com/client9/stringencoders
@@ -14,17 +14,17 @@
  * If you are ripping this out of the library, comment out the next
  * line and uncomment the next lines as approrpiate
  */
-// #include "config.h"
+#include "config.h"
 
 /* public header */
-#include "modp_b64.h"
+#include "modp_b64w.h"
 
 /* if on motorola, sun, ibm; uncomment this */
 /* #define WORDS_BIGENDIAN 1 */
 /* else for Intel, Amd; uncomment this */
 /* #undef WORDS_BIGENDIAN */
 
-#include "modp_b64_data.h"
+#include "modp_b64w_data.h"
 
 #define BADCHAR 0x01FFFFFF
 
@@ -45,7 +45,7 @@
 #define CHARPAD '\0'
 #endif
 
-size_t modp_b64_encode(char* dest, const char* str, size_t len)
+size_t modp_b64w_encode(char* dest, const char* str, size_t len)
 {
     size_t i = 0;
     const uint8_t* s = (const uint8_t*)str;
@@ -92,7 +92,7 @@ size_t modp_b64_encode(char* dest, const char* str, size_t len)
 }
 
 #ifdef WORDS_BIGENDIAN /* BIG ENDIAN -- SUN / IBM / MOTOROLA */
-size_t modp_b64_decode(char* dest, const char* src, size_t len)
+size_t modp_b64w_decode(char* dest, const char* src, size_t len)
 {
     size_t i;
     if (len == 0)
@@ -164,7 +164,7 @@ size_t modp_b64_decode(char* dest, const char* src, size_t len)
 
 #else /* LITTLE  ENDIAN -- INTEL AND FRIENDS */
 
-size_t modp_b64_decode(char* dest, const char* src, size_t len)
+size_t modp_b64w_decode(char* dest, const char* src, size_t len)
 {
     size_t i;
     size_t leftover;
