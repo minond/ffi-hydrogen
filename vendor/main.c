@@ -22,8 +22,8 @@ int main(int argc, char **argv) {
   hydro_secretbox_keygen(key);
   hydro_secretbox_encrypt(ciphertext, text, strlen(text), 0, context, key);
 
-  char decrypted[strlen(text)];
-  if (hydro_secretbox_decrypt(decrypted, ciphertext, msgsize, 0, context,
+  char decrypted[strlen(ciphertext) - hydro_secretbox_HEADERBYTES];
+  if (hydro_secretbox_decrypt(decrypted, ciphertext, strlen(ciphertext), 0, context,
                               key) != 0) {
     printf("error");
   }

@@ -8,5 +8,8 @@ CFLAGS ?= -O3 -march=native -fno-exceptions $(WFLAGS)
 main.dylib: main.o
 	$(CC) $< -shared -o $@
 
+main: main.o
+	$(CC) $< -o $@
+
 main.o: main.c
 	$(CC) -c $(CFLAGS) $< -o $@
