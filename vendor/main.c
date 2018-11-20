@@ -1,13 +1,11 @@
 #include <stdio.h>
 
-#include <hydrogen.h>
+#include "libhydrogen/hydrogen.c"
 #include "stringencoders/src/modp_b64.c"
 
-int
-main(int argc, char **argv)
-{
-  (void) argc;
-  (void) argv;
+int main(int argc, char **argv) {
+  (void)argc;
+  (void)argv;
 
   if (hydro_init() != 0) {
     abort();
@@ -25,7 +23,8 @@ main(int argc, char **argv)
   hydro_secretbox_encrypt(ciphertext, text, strlen(text), 0, context, key);
 
   char decrypted[strlen(text)];
-  if (hydro_secretbox_decrypt(decrypted, ciphertext, msgsize, 0, context, key) != 0) {
+  if (hydro_secretbox_decrypt(decrypted, ciphertext, msgsize, 0, context,
+                              key) != 0) {
     printf("error");
   }
 
