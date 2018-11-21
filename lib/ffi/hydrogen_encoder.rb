@@ -59,7 +59,7 @@ module FFI
       buff_len = modp_b64_encode_len(text_len)
 
       prep_string_and_buffer(text, buff_len) do |text_ptr, buff_ptr|
-        size = ::FFI::HydrogenEncoder._modp_b64_encode(buff_ptr, text, text_len)
+        size = ::FFI::HydrogenEncoder._modp_b64_encode(buff_ptr, text_ptr, text_len)
         encoded = buff_ptr.get_bytes(0, size)
       end
 
@@ -72,7 +72,7 @@ module FFI
       buff_len = modp_b64_decode_len(text_len)
 
       prep_string_and_buffer(text, buff_len) do |text_ptr, buff_ptr|
-        size = ::FFI::HydrogenEncoder._modp_b64_decode(buff_ptr, text, text_len)
+        size = ::FFI::HydrogenEncoder._modp_b64_decode(buff_ptr, text_ptr, text_len)
         decoded = buff_ptr.get_bytes(0, size)
       end
 
