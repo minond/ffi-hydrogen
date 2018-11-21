@@ -3,6 +3,23 @@
 #include "libhydrogen/hydrogen.c"
 #include "stringencoders/src/modp_b64.c"
 
+size_t encrypt_encode(char *dest, const void *message, uint64_t message_id,
+                      const char context[hydro_secretbox_CONTEXTBYTES],
+                      const uint8_t key[hydro_secretbox_KEYBYTES]) {
+  int enc_len = hydro_secretbox_HEADERBYTES + strlen(message);
+  uint8_t ciphertext[enc_len];
+  int status = hydro_secretbox_encrypt(ciphertext, message, strlen(message),
+                                       message_id, context, key);
+
+  // Something wen't wrong with the encryption. Skip encoding and return 0 as
+  // the size of the encoding string.
+  if (status != 0) {
+    return 0;
+  }
+
+  return modp_b64_encode(dest, ciphertext, enc_len);
+}
+
 int main(int argc, char **argv) {
   (void)argc;
   (void)argv;
@@ -23,8 +40,8 @@ int main(int argc, char **argv) {
   hydro_secretbox_encrypt(ciphertext, text, strlen(text), 0, context, key);
 
   char decrypted[strlen(ciphertext) - hydro_secretbox_HEADERBYTES];
-  if (hydro_secretbox_decrypt(decrypted, ciphertext, strlen(ciphertext), 0, context,
-                              key) != 0) {
+  if (hydro_secretbox_decrypt(decrypted, ciphertext, strlen(ciphertext), 0,
+                              context, key) != 0) {
     printf("error");
   }
 
@@ -38,7 +55,7 @@ int main(int argc, char **argv) {
   modp_b64_encode(encoded, str, strlen(str));
   printf("%s\n", encoded);
 
-  char *decoded[strlen(encoded)];
+  char *decoded[modp_b64_decode_len(strlen(encoded))];
   memset(decoded, 0, modp_b64_encode_len(strlen(str)));
 
   size_t s = modp_b64_decode(decoded, encoded, strlen(encoded));

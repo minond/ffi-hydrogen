@@ -31,6 +31,28 @@ module FFI
     # size_t modp_b64_decode(char* dest, const char* src, size_t len)
     attach_function :_modp_b64_decode, :modp_b64_decode, [:pointer, :pointer, :size_t], :size_t
 
+    # size_t encrypt_encode(char *dest, const void *message, uint64_t message_id,
+    #                       const char context[hydro_secretbox_CONTEXTBYTES],
+    #                       const uint8_t key[hydro_secretbox_KEYBYTES])
+    attach_function :_encrypt_encode, :encrypt_encode, [:pointer, :pointer, :uint64, :pointer, :pointer], :size_t
+
+    def self.encrypt_encode(text, context, key)
+      encoded = nil
+      text_len = text.bytesize
+      buff_len = modp_b64_encode_len(HEADERBYTES + text_len)
+
+      prep_string_and_buffer(text, buff_len) do |text_ptr, buff_ptr|
+        create_context(context) do |context_ptr|
+          create_key(key) do |key_ptr|
+            size = ::FFI::HydrogenEncoder._encrypt_encode(buff_ptr, text, 0, context, key)
+            encoded = buff_ptr.get_bytes(0, size)
+          end
+        end
+      end
+
+      encoded
+    end
+
     def self.modp_b64_encode(text)
       encoded = nil
       text_len = text.bytesize
