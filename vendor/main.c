@@ -22,13 +22,18 @@
  *     size_t size = encrypt_encode(dest, message, strlen(message), 0, context, key);
  *
  *
+ * @see https://github.com/jedisct1/libhydrogen/wiki/Contexts
+ * @see https://github.com/jedisct1/libhydrogen/wiki/Secret-key-encryption
+ *
  * @param dest stores the output string
  * @param message is the original message to encrypt and encode
  * @param message_len is the size of the message parameter
- * @param message_id XXX
- * @param context XXX
- * @param key XXX
+ * @param message_id optional message tag
+ * @param context is an 8 char string describing usage.
+ * @param key the shared, secret 32 bit key used in encryption/decryption
  * @return size of the encoded string
+ *
+ * TODO assert context and key length
  */
 size_t encrypt_encode(char* dest, const char* message, size_t message_len,
                       uint64_t message_id,
@@ -43,6 +48,9 @@ size_t encrypt_encode(char* dest, const char* message, size_t message_len,
     return 0;
   }
 
+  // TODO I'm making the assumption that a uint8_t[cipher_len] is a safe
+  // substitute for the char* as expected by modp_b64_encode. Make sure this is
+  // correct.
   return modp_b64_encode(dest, cipher, cipher_len);
 }
 
@@ -68,10 +76,12 @@ size_t encrypt_encode(char* dest, const char* message, size_t message_len,
  * @param dest stores the output string
  * @param message is the message to decode and decrypt
  * @param message_len is the size of the message parameter
- * @param message_id XXX
- * @param context XXX
- * @param key XXX
+ * @param message_id optional message tag
+ * @param context is an 8 char string describing usage.
+ * @param key the shared, secret 32 bit key used in encryption/decryption
  * @return size of the decrypted string
+ *
+ * TODO assert context and key length
  */
 size_t decode_decrypt(char* dest, const void* message, size_t message_len,
                       uint64_t message_id,
@@ -80,6 +90,10 @@ size_t decode_decrypt(char* dest, const void* message, size_t message_len,
   int max_decoded_len = modp_b64_decode_len(message_len);
   char* decoded[max_decoded_len];
   int decoded_len = modp_b64_decode(decoded, message, message_len);
+
+  // TODO I'm making the assumption that a char* is a safe substitute for the
+  // uint8_t* as expected by hydro_secretbox_decrypt. Make sure this is
+  // correct.
   int status = hydro_secretbox_decrypt(dest, decoded, decoded_len, message_id,
                                        context, key);
 
