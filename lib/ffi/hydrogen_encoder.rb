@@ -210,12 +210,12 @@ module FFI
         ::FFI::HydrogenEncoder.hydro_secretbox_decrypt(text, @context_ptr, @key_ptr)
       end
 
-      def encrypt_encode(text)
-        ::FFI::HydrogenEncoder.encrypt_encode(text, @context_ptr, @key_ptr)
+      def encrypt_encode(text, message_id = 0)
+        ::FFI::HydrogenEncoder.encrypt_encode(text, @context_ptr, @key_ptr, message_id)
       end
 
-      def decode_decrypt(text)
-        ::FFI::HydrogenEncoder.decode_decrypt(text, @context_ptr, @key_ptr)
+      def decode_decrypt(text, message_id = 0)
+        ::FFI::HydrogenEncoder.decode_decrypt(text, @context_ptr, @key_ptr, message_id)
       end
     end
   end
