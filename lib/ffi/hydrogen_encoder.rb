@@ -137,7 +137,6 @@ module FFI
             end
           end
         end
-
       end
 
       encrypted
@@ -164,9 +163,7 @@ module FFI
     end
 
     def self.create_context(context)
-      if context.is_a?(::FFI::MemoryPointer)
-        return yield(context)
-      end
+      return yield(context) if context.is_a?(::FFI::MemoryPointer)
 
       ::FFI::MemoryPointer.new(:char, context.bytesize) do |context_ptr|
         context_ptr.put_bytes(0, context)
@@ -175,9 +172,7 @@ module FFI
     end
 
     def self.create_key(key)
-      if key.is_a?(::FFI::MemoryPointer)
-        return yield(key)
-      end
+      return yield(key) if key.is_a?(::FFI::MemoryPointer)
 
       ::FFI::MemoryPointer.new(:uint8, key.bytesize) do |key_ptr|
         key_ptr.put_bytes(0, key)
