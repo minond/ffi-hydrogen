@@ -111,16 +111,15 @@ int main(int argc, char** argv) {
   const uint8_t key[hydro_secretbox_KEYBYTES];
   hydro_secretbox_keygen(key);
 
-  int encrypt_encode_len =
+  int max_enc =
       modp_b64_encode_len(strlen(message) + hydro_secretbox_HEADERBYTES);
-  char* encoded_ptr[encrypt_encode_len];
-  size_t size =
-      encrypt_encode(encoded_ptr, message, strlen(message), 0, context, key);
+  char* encoded[max_enc];
+  int enc_size =
+      encrypt_encode(encoded, message, strlen(message), 0, context, key);
 
-  int max_size = modp_b64_decode_len(strlen(encoded_ptr));
+  int max_size = modp_b64_decode_len(enc_size);
   char* result[max_size];
-  int real_size =
-      decode_decrypt(result, encoded_ptr, strlen(encoded_ptr), 0, context, key);
+  int real_size = decode_decrypt(result, encoded, enc_size, 0, context, key);
   printf("max_size = %d\n", max_size);
   printf("size = %d\n", real_size);
   printf("result = %s\n", result);
