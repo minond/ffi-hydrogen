@@ -43,7 +43,7 @@ module FFI
     #                       const uint8_t key[hydro_secretbox_KEYBYTES])
     attach_function :_decode_decrypt, :decode_decrypt, [:pointer, :pointer, :size_t, :uint64, :pointer, :pointer], :size_t
 
-    def self.encrypt_encode(text, context, key)
+    def self.encrypt_encode(text, context, key, message_id = 0)
       result = nil
       text_len = text.bytesize
       max_len = modp_b64_encode_len(text_len + HEADERBYTES)
@@ -51,7 +51,7 @@ module FFI
       create_key(key) do |key_ptr|
         create_context(context) do |context_ptr|
           create_string_and_buffer(text, max_len) do |text_ptr, buff_ptr|
-            size = _encrypt_encode(buff_ptr, text_ptr, text_len, 0, context_ptr, key_ptr)
+            size = _encrypt_encode(buff_ptr, text_ptr, text_len, message_id, context_ptr, key_ptr)
             result = buff_ptr.get_bytes(0, size)
           end
         end
@@ -60,7 +60,7 @@ module FFI
       result
     end
 
-    def self.decode_decrypt(text, context, key)
+    def self.decode_decrypt(text, context, key, message_id = 0)
       result = nil
       text_len = text.bytesize
       max_len = modp_b64_decode_len(text_len)
@@ -68,7 +68,7 @@ module FFI
       create_key(key) do |key_ptr|
         create_context(context) do |context_ptr|
           create_string_and_buffer(text, max_len) do |text_ptr, buff_ptr|
-            size = _decode_decrypt(buff_ptr, text_ptr, text_len, 0, context_ptr, key_ptr)
+            size = _decode_decrypt(buff_ptr, text_ptr, text_len, message_id, context_ptr, key_ptr)
             result = buff_ptr.get_bytes(0, size)
           end
         end
@@ -122,7 +122,7 @@ module FFI
       key
     end
 
-    def self.hydro_secretbox_encrypt(text, context, key)
+    def self.hydro_secretbox_encrypt(text, context, key, message_id = 0)
       encrypted = nil
       cipher_len = HEADERBYTES + text.bytesize
 
@@ -132,7 +132,7 @@ module FFI
 
           create_context(context) do |context_ptr|
             create_key(key) do |key_ptr|
-              ::FFI::HydrogenEncoder._hydro_secretbox_encrypt(cipher_ptr, text_ptr, text.bytesize, 0, context_ptr, key_ptr)
+              ::FFI::HydrogenEncoder._hydro_secretbox_encrypt(cipher_ptr, text_ptr, text.bytesize, message_id, context_ptr, key_ptr)
               encrypted = cipher_ptr.get_bytes(0, cipher_len)
             end
           end
@@ -143,7 +143,7 @@ module FFI
       encrypted
     end
 
-    def self.hydro_secretbox_decrypt(cipher_text, context, key)
+    def self.hydro_secretbox_decrypt(cipher_text, context, key, message_id = 0)
       encrypted = nil
       cipher_len = cipher_text.bytesize - HEADERBYTES
 
@@ -153,7 +153,7 @@ module FFI
 
           create_context(context) do |context_ptr|
             create_key(key) do |key_ptr|
-              ::FFI::HydrogenEncoder._hydro_secretbox_decrypt(text_ptr, cipher_ptr, cipher_text.bytesize, 0, context_ptr, key_ptr)
+              ::FFI::HydrogenEncoder._hydro_secretbox_decrypt(text_ptr, cipher_ptr, cipher_text.bytesize, message_id, context_ptr, key_ptr)
               encrypted = text_ptr.get_bytes(0, cipher_len)
             end
           end
