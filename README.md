@@ -1,4 +1,4 @@
-# Ffi::HydrogenEncoder
+# FFI::HydrogenEncoder
 
 Combine [libhydrogen](https://github.com/jedisct1/libhydrogen) with a good
 implementation of string encoding in C, Nick Galbreath's
@@ -11,7 +11,7 @@ that is URL safe.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'ffi-hydrogen_encoder'
+gem "ffi-hydrogen_encoder"
 ```
 
 And then execute:
