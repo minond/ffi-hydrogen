@@ -37,10 +37,10 @@ task :compile do
 end
 
 desc "Run all benchmarks"
-task :benchmark do
-  ruby "test/bench/both.rb"
-  ruby "test/bench/encode.rb"
-  ruby "test/bench/encrypt.rb"
+task :bench do
+  ruby "bench/both.rb"
+  ruby "bench/encode.rb"
+  ruby "bench/encrypt.rb"
 end
 
 task :default => [:compile, :rubocop, :spec]
