@@ -1,5 +1,6 @@
 require "benchmark/ips"
 require "rbnacl"
+require "urlcrypt"
 
 require "ffi/hydrogen_encoder"
 
@@ -22,6 +23,10 @@ Benchmark.ips do |b|
     rbnacl_box = ::RbNaCl::SimpleBox.from_secret_key(rbnacl_key)
     rbnacl_encrypted = rbnacl_box.encrypt(text)
 
+    urlcrypt_key = "h34j4k3l25gh342o5jk46ghjk5nbjkl7nhljk34532j4k5b43hjk5g432jk6v4gjhk6f5j6gv5hj2k3g54hjk321g4hjk25g4hjk35gf4yu6f5jg5b43jk25h4jk325d"
+    ::URLcrypt.key = [urlcrypt_key].pack("H*")
+    urlcrypt_encrypted = ::URLcrypt.encrypt(text)
+
     b.report("boxed_encrypt_encode_#{label}") do |n|
       i = 0
       while i < n
@@ -30,10 +35,26 @@ Benchmark.ips do |b|
       end
     end
 
-    b.report("boxed_decode_decrypt#{label}") do |n|
+    b.report("boxed_decode_decrypt_#{label}") do |n|
       i = 0
       while i < n
         hydrogen_box.decode_decrypt(hydrogen_encrypted_encoded)
+        i += 1
+      end
+    end
+
+    b.report("urlcrypt_encrypt_#{label}") do |n|
+      i = 0
+      while i < n
+        ::URLcrypt.encrypt(text)
+        i += 1
+      end
+    end
+
+    b.report("urlcrypt_decrypt_#{label}") do |n|
+      i = 0
+      while i < n
+        ::URLcrypt.decrypt(urlcrypt_encrypted)
         i += 1
       end
     end
