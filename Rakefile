@@ -3,13 +3,6 @@ require "ffi"
 require "rspec/core/rake_task"
 require "rubocop/rake_task"
 
-RSpec::Core::RakeTask.new(:spec)
-
-desc "Run RuboCop"
-task :rubocop do
-  RuboCop::RakeTask.new
-end
-
 def sys(cmd)
   puts "#{cmd}"
   ret = system(cmd)
@@ -17,7 +10,14 @@ def sys(cmd)
   ret
 end
 
-desc "Compile Shared Library"
+RSpec::Core::RakeTask.new(:spec)
+
+desc "Run RuboCop"
+task :rubocop do
+  RuboCop::RakeTask.new
+end
+
+desc "Compile shared library"
 task :compile do
   wflags = "-Wall -Wextra -Wmissing-prototypes -Wdiv-by-zero"\
     " -Wbad-function-cast -Wcast-align -Wcast-qual -Wfloat-equal"\
@@ -34,6 +34,13 @@ task :compile do
   # main.dylib: main.o
   # 	$(CC) $< -shared -o $@
   sys("cc vendor/main.o -shared -o vendor/main.#{::FFI::Platform::LIBSUFFIX}")
+end
+
+desc "Run all benchmarks"
+task :benchmark do
+  ruby "test/bench/both.rb"
+  ruby "test/bench/encode.rb"
+  ruby "test/bench/encrypt.rb"
 end
 
 task :default => [:compile, :rubocop, :spec]
