@@ -11,6 +11,11 @@ stages:
   script:
     - bundle exec rake
 
+before_script:
+  - gem update --system
+  - gem install bundler --no-doc
+  - bundle install --jobs=2 --retry=3
+
 jruby:9.1.7.0:
   <<: *compile-and-test
   before_script:
@@ -20,9 +25,11 @@ jruby:9.1.7.0:
     - apt-get update
     - apt-get install gcc -y
 
+ruby:2.6:
+  <<: *compile-and-test
+
+ruby:2.5:
+  <<: *compile-and-test
+
 ruby:2.3.1:
   <<: *compile-and-test
-  before_script:
-    - gem update --system
-    - gem install bundler --no-doc
-    - bundle install --jobs=2 --retry=3
