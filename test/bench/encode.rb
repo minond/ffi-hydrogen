@@ -3,16 +3,16 @@ require "benchmark/ips"
 
 require "ffi/hydrogen_encoder"
 
-Benchmark.ips do |b|
-  b.time = 2
-  b.warmup = 1
+def suite(text)
+  puts "============================ Test string length: #{text.size} ============================"
 
-  ten_char = "0123456789"
-  fifty_char = "<abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuv>"
-  hundred_char = "<abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz0123456789!@#^&*()_+>"
+  label = "#{text.size}_char"
 
-  def suite(b, label, text)
-    encoded = ::FFI::HydrogenEncoder.modp_b64_encode(text)
+  encoded = ::FFI::HydrogenEncoder.modp_b64_encode(text)
+
+  Benchmark.ips do |b|
+    b.time = 2
+    b.warmup = 1
 
     b.report("modp_b64_encode_#{label}") do |n|
       i = 0
@@ -45,11 +45,17 @@ Benchmark.ips do |b|
         i += 1
       end
     end
+
+    b.compare!
   end
+end
 
-  suite(b, :ten_char, ten_char)
-  suite(b, :fifty_char, fifty_char)
-  suite(b, :hundred_char, hundred_char)
+test_strings = [
+  "0123456789",
+  "<abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuv>",
+  "<abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz0123456789!@#^&*()_+>",
+]
 
-  b.compare!
+test_strings.each do |str|
+  suite(str)
 end
