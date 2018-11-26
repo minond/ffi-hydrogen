@@ -12,19 +12,18 @@ end
 
 def sys(cmd)
   puts "#{cmd}"
-  unless ret = system(cmd)
-    raise "ERROR: '#{cmd}' failed"
-  end
+  ret = system(cmd)
+  raise "ERROR: '#{cmd}' failed" unless ret
   ret
 end
 
 desc "Compile Shared Library"
 task :compile do
-  wflags = %q{-Wall -Wextra -Wmissing-prototypes -Wdiv-by-zero \
-    -Wbad-function-cast -Wcast-align -Wcast-qual -Wfloat-equal \
-    -Wmissing-declarations -Wnested-externs -Wno-unknown-pragmas \
-    -Wpointer-arith -Wredundant-decls -Wstrict-prototypes -Wswitch-enum \
-    -Wno-type-limits}
+  wflags = "-Wall -Wextra -Wmissing-prototypes -Wdiv-by-zero"\
+    " -Wbad-function-cast -Wcast-align -Wcast-qual -Wfloat-equal"\
+    " -Wmissing-declarations -Wnested-externs -Wno-unknown-pragmas"\
+    " -Wpointer-arith -Wredundant-decls -Wstrict-prototypes -Wswitch-enum"\
+    " -Wno-type-limits"
 
   cflags = "-O3 -march=native -fno-exceptions #{wflags}"
 
