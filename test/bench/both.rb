@@ -5,6 +5,8 @@ require "urlcrypt"
 
 require "ffi/hydrogen_encoder"
 
+require "./test/bench/init.rb"
+
 def suite(text)
   puts "============================ Test string length: #{text.size} ============================"
 
@@ -80,12 +82,6 @@ def suite(text)
   end
 end
 
-test_strings = [
-  "0123456789",
-  "<abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuv>",
-  "<abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz0123456789!@#^&*()_+>",
-]
-
-test_strings.each do |str|
+TEST_STRINGS.each do |str|
   suite(str)
 end
