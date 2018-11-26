@@ -25,9 +25,6 @@ jruby:9.1.7.0:
     - apt-get update
     - apt-get install gcc -y
 
-ruby:2.6:
-  <<: *compile-and-test
-
 ruby:2.5:
   <<: *compile-and-test
 
