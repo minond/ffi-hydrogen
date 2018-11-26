@@ -197,12 +197,12 @@ module FFI
         @key_ptr.put_bytes(0, key)
       end
 
-      def encrypt(text)
-        ::FFI::HydrogenEncoder.hydro_secretbox_encrypt(text, @context_ptr, @key_ptr)
+      def encrypt(text, message_id = 0)
+        ::FFI::HydrogenEncoder.hydro_secretbox_encrypt(text, @context_ptr, @key_ptr, message_id)
       end
 
-      def decrypt(text)
-        ::FFI::HydrogenEncoder.hydro_secretbox_decrypt(text, @context_ptr, @key_ptr)
+      def decrypt(text, message_id = 0)
+        ::FFI::HydrogenEncoder.hydro_secretbox_decrypt(text, @context_ptr, @key_ptr, message_id)
       end
 
       def encrypt_encode(text, message_id = 0)

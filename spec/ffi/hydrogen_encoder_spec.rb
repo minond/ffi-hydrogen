@@ -27,6 +27,18 @@ RSpec.describe ::FFI::HydrogenEncoder do
       encrypted = ::FFI::HydrogenEncoder.hydro_secretbox_encrypt(str, ctx, key)
       expect(encrypted).not_to eq(str)
     end
+
+    it "encrypts a string differently when context changes" do
+      encrypted1 = ::FFI::HydrogenEncoder.hydro_secretbox_encrypt(str, ctx, key)
+      encrypted2 = ::FFI::HydrogenEncoder.hydro_secretbox_encrypt(str, "another1", key)
+      expect(encrypted1).not_to eq(encrypted2)
+    end
+
+    it "encrypts a string differently when message_id changes" do
+      encrypted1 = ::FFI::HydrogenEncoder.hydro_secretbox_encrypt(str, ctx, key, 0)
+      encrypted2 = ::FFI::HydrogenEncoder.hydro_secretbox_encrypt(str, ctx, key, 1)
+      expect(encrypted1).not_to eq(encrypted2)
+    end
   end
 
   describe "#hydro_secretbox_decrypt" do
@@ -34,6 +46,24 @@ RSpec.describe ::FFI::HydrogenEncoder do
       encrypted = ::FFI::HydrogenEncoder.hydro_secretbox_encrypt(str, ctx, key)
       decrypted = ::FFI::HydrogenEncoder.hydro_secretbox_decrypt(encrypted, ctx, key)
       expect(decrypted).to eq(str)
+    end
+
+    it "encrypts a string differently when context and message_id changes" do
+      encrypted = ::FFI::HydrogenEncoder.hydro_secretbox_encrypt(str, "another1", key, 1)
+      decrypted = ::FFI::HydrogenEncoder.hydro_secretbox_decrypt(encrypted, "another1", key, 1)
+      expect(decrypted).to eq(str)
+    end
+
+    it "fails to decrypt when context does not match" do
+      encrypted = ::FFI::HydrogenEncoder.hydro_secretbox_encrypt(str, ctx, key)
+      decrypted = ::FFI::HydrogenEncoder.hydro_secretbox_decrypt(encrypted, "another1", key)
+      expect(decrypted).not_to eq(str)
+    end
+
+    it "fails to decrypt when message_id does not match" do
+      encrypted = ::FFI::HydrogenEncoder.hydro_secretbox_encrypt(str, ctx, key, 1)
+      decrypted = ::FFI::HydrogenEncoder.hydro_secretbox_decrypt(encrypted, ctx, key, 2)
+      expect(decrypted).not_to eq(str)
     end
   end
 
@@ -45,6 +75,12 @@ RSpec.describe ::FFI::HydrogenEncoder do
         encrypted = box.encrypt(str)
         expect(encrypted).not_to eq(str)
       end
+
+      it "encrypts a string differently when message_id changes" do
+        encrypted1 = box.encrypt(str, 1)
+        encrypted2 = box.encrypt(str, 2)
+        expect(encrypted1).not_to eq(encrypted2)
+      end
     end
 
     describe "#decrypt" do
@@ -53,12 +89,24 @@ RSpec.describe ::FFI::HydrogenEncoder do
         decrypted = box.decrypt(encrypted)
         expect(decrypted).to eq(str)
       end
+
+      it "fails to decrypt when message_id does not match" do
+        encrypted = box.encrypt(str, 1)
+        decrypted = box.decrypt(encrypted, 2)
+        expect(decrypted).not_to eq(str)
+      end
     end
 
     describe "#encrypt_encode" do
       it "encrypts/encodes a string which does not match the original" do
         encrypted = box.encrypt_encode(str)
         expect(encrypted).not_to eq(str)
+      end
+
+      it "encrypts a string differently when message_id changes" do
+        encrypted1 = box.encrypt_encode(str, 1)
+        encrypted2 = box.encrypt_encode(str, 2)
+        expect(encrypted1).not_to eq(encrypted2)
       end
     end
 
@@ -67,6 +115,12 @@ RSpec.describe ::FFI::HydrogenEncoder do
         encrypted = box.encrypt_encode(str)
         decrypted = box.decode_decrypt(encrypted)
         expect(decrypted).to eq(str)
+      end
+
+      it "fails to decrypt when message_id does not match" do
+        encrypted = box.encrypt_encode(str, 1)
+        decrypted = box.decode_decrypt(encrypted, 2)
+        expect(decrypted).not_to eq(str)
       end
     end
   end
