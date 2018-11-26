@@ -1,10 +1,9 @@
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "ffi/hydrogen_encoder/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "ffi-hydrogen_encoder"
-  spec.version       = FFI::HydrogenEncoder::VERSION
+  spec.version       = "0.1.0"
   spec.authors       = ["Marcos Minond"]
   spec.email         = ["marcos.minond@mx.com"]
 
