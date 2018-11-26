@@ -3,7 +3,7 @@ require "rbnacl"
 
 require "ffi/hydrogen_encoder"
 
-require "./test/bench/init.rb"
+require_relative "./init.rb"
 
 def suite(str)
   puts "============================ Test string length: #{str.size} ============================"
