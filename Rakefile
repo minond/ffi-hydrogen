@@ -25,7 +25,7 @@ task :compile do
     " -Wpointer-arith -Wredundant-decls -Wstrict-prototypes -Wswitch-enum"\
     " -Wno-type-limits"
 
-  cflags = "-O3 -march=native -fno-exceptions #{wflags}"
+  cflags = "-O3 -march=native -fPIC -fno-exceptions #{wflags}"
 
   # main.o: main.c
   #   $(CC) -c $(CFLAGS) $< -o $@
