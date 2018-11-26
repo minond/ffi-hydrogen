@@ -9,7 +9,6 @@ stages:
   image: "${CI_BUILD_NAME}"
   stage: test
   script:
-    - bundle exec rake compile
     - bundle exec rake
 
 jruby:9.1.7.0:

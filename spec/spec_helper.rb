@@ -1,6 +1,5 @@
 require "bundler/setup"
 require "ffi/hydrogen_encoder"
-require "ffi/hydrogen_encoder/version"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
