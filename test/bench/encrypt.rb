@@ -16,10 +16,27 @@ Benchmark.ips do |b|
     hydrogen_context = "benched1"
     hydrogen_box = ::FFI::HydrogenEncoder::Secretbox.new(hydrogen_context, hydrogen_key)
     hydrogen_encrypted = hydrogen_box.encrypt(text)
+    hydrogen_encrypted_encoded = hydrogen_box.encrypt_encode(text)
 
     rbnacl_key = ::RbNaCl::Random.random_bytes(::RbNaCl::SecretBox.key_bytes)
     rbnacl_box = ::RbNaCl::SimpleBox.from_secret_key(rbnacl_key)
     rbnacl_encrypted = rbnacl_box.encrypt(text)
+
+    b.report("boxed_encrypt_encode_#{label}") do |n|
+      i = 0
+      while i < n
+        hydrogen_box.encrypt_encode(text)
+        i += 1
+      end
+    end
+
+    b.report("boxed_decode_decrypt#{label}") do |n|
+      i = 0
+      while i < n
+        hydrogen_box.decode_decrypt(hydrogen_encrypted_encoded)
+        i += 1
+      end
+    end
 
     b.report("hydro_secretbox_encrypt_#{label}") do |n|
       i = 0
