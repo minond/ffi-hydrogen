@@ -20,6 +20,12 @@ before_script:
 
 jruby:9.1.7.0:
   <<: *test-specific-version
+  before_script:
+    - gem update --system
+    - gem install bundler --no-doc
+    - bundle install --jobs=2 --retry=3
+    - apt-get update
+    - apt-get install build-essential
 
 ruby:2.3.1:
   <<: *test-specific-version
