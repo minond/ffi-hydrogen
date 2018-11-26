@@ -37,6 +37,4 @@ task :compile do
   sys("cc vendor/main.o -shared -o vendor/main.#{::FFI::Platform::LIBSUFFIX}")
 end
 
-Rake::Task[:spec].prerequisites << :compile
-
-task :default => [:rubocop, :spec]
+task :default => [:compile, :rubocop, :spec]
