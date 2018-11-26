@@ -19,20 +19,20 @@ before_script:
 jruby:9.1.7.0:
   <<: *compile-and-test
   before_script:
+    - apt-get update
+    - apt-get install gcc -y
     - gem update --system
     - gem install bundler --no-doc
     - bundle install --jobs=2 --retry=3
-    - apt-get update
-    - apt-get install gcc -y
 
 jruby:latest:
   <<: *compile-and-test
   before_script:
+    - apt-get update
+    - apt-get install git gcc -y
     - gem update --system
     - gem install bundler --no-doc
     - bundle install --jobs=2 --retry=3
-    - apt-get update
-    - apt-get install git gcc -y
 
 ruby:latest:
   <<: *compile-and-test
