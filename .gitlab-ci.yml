@@ -1,0 +1,24 @@
+cache:
+  paths:
+    - vendor
+
+stages:
+  - test
+
+before_script:
+  - gem update --system
+  - gem install bundler --no-doc
+  - bundle install --jobs=2 --retry=3
+
+.test-specific-version: &test-specific-version
+  image: "${CI_BUILD_NAME}"
+  stage: test
+  script:
+    - bundle exec rake compile
+    - bundle exec rake
+
+jruby:9.1.7.0:
+  <<: *test-specific-version
+
+ruby:2.3.1:
+  <<: *test-specific-version
