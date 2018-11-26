@@ -3,9 +3,9 @@ RSpec.describe ::FFI::HydrogenEncoder do
   str = "j4k3l25hj4l6hgb54jk6ghkj4g5k4h36jk45"
   ctx = "spectest"
 
-  it "has a version number" do
-    expect(::FFI::HydrogenEncoder::VERSION).not_to be nil
-  end
+  # it "has a version number" do
+  #   expect(::FFI::HydrogenEncoder::VERSION).not_to be nil
+  # end
 
   describe "#modp_b64_encode" do
     it "encodes a string so that it does not match the original" do
