@@ -5,12 +5,7 @@ cache:
 stages:
   - test
 
-before_script:
-  - gem update --system
-  - gem install bundler --no-doc
-  - bundle install --jobs=2 --retry=3
-
-.test-specific-version: &test-specific-version
+.compile-and-test: &compile-and-test
   image: "${CI_BUILD_NAME}"
   stage: test
   script:
@@ -18,10 +13,17 @@ before_script:
     - bundle exec rake
 
 jruby:9.1.7.0:
-  <<: *test-specific-version
+  <<: *compile-and-test
   before_script:
+    - gem update --system
+    - gem install bundler --no-doc
+    - bundle install --jobs=2 --retry=3
     - apt-get update
     - apt-get install gcc -y
 
 ruby:2.3.1:
-  <<: *test-specific-version
+  <<: *compile-and-test
+  before_script:
+    - gem update --system
+    - gem install bundler --no-doc
+    - bundle install --jobs=2 --retry=3
