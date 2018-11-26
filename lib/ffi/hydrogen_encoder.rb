@@ -1,5 +1,4 @@
 require "ffi"
-require "ffi/hydrogen_encoder/version"
 
 module FFI
   module HydrogenEncoder
