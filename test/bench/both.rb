@@ -7,24 +7,23 @@ require "ffi/hydrogen_encoder"
 
 require "./test/bench/init.rb"
 
-def suite(text)
-  puts "============================ Test string length: #{text.size} ============================"
+def suite(str)
+  puts "============================ Test string length: #{str.size} ============================"
 
-  label = "#{text.size}_char"
+  label = "#{str.size}_char"
 
   hydrogen_key = ::FFI::HydrogenEncoder.hydro_secretbox_keygen
   hydrogen_context = "benched1"
   hydrogen_box = ::FFI::HydrogenEncoder::Secretbox.new(hydrogen_context, hydrogen_key)
-  hydrogen_encrypted_encoded = hydrogen_box.encrypt_encode(text)
+  hydrogen_encrypted_encoded = hydrogen_box.encrypt_encode(str)
 
   rbnacl_key = ::RbNaCl::Random.random_bytes(::RbNaCl::SecretBox.key_bytes)
   rbnacl_box = ::RbNaCl::SimpleBox.from_secret_key(rbnacl_key)
-  rbnacl_encrypted = rbnacl_box.encrypt(text)
-  rbnacl_encrypted_encoded = ::Base64.encode64(rbnacl_box.encrypt(text))
+  rbnacl_encrypted_encoded = ::Base64.encode64(rbnacl_box.encrypt(str))
 
   urlcrypt_key = "h34j4k3l25gh342o5jk46ghjk5nbjkl7nhljk34532j4k5b43hjk5g432jk6v4gjhk6f5j6gv5hj2k3g54hjk321g4hjk25g4hjk35gf4yu6f5jg5b43jk25h4jk325d"
   ::URLcrypt.key = [urlcrypt_key].pack("H*")
-  urlcrypt_encrypted = ::URLcrypt.encrypt(text)
+  urlcrypt_encrypted = ::URLcrypt.encrypt(str)
 
   Benchmark.ips do |b|
     b.time = 2
@@ -33,7 +32,7 @@ def suite(text)
     b.report("boxed_encrypt_encode_#{label}") do |n|
       i = 0
       while i < n
-        hydrogen_box.encrypt_encode(text)
+        hydrogen_box.encrypt_encode(str)
         i += 1
       end
     end
@@ -49,7 +48,7 @@ def suite(text)
     b.report("urlcrypt_encrypt_#{label}") do |n|
       i = 0
       while i < n
-        ::URLcrypt.encrypt(text)
+        ::URLcrypt.encrypt(str)
         i += 1
       end
     end
@@ -65,7 +64,7 @@ def suite(text)
     b.report("boxed_rbnacl_simplebox_encrypt_plus_base64_#{label}") do |n|
       i = 0
       while i < n
-        ::Base64.encode64(rbnacl_box.encrypt(text))
+        ::Base64.encode64(rbnacl_box.encrypt(str))
         i += 1
       end
     end
