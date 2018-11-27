@@ -1,0 +1,32 @@
+require "ffi"
+
+def sys(cmd)
+  puts "#{cmd}"
+  ret = system(cmd)
+  raise "ERROR: '#{cmd}' failed" unless ret
+  ret
+end
+
+desc "Compile shared library"
+task :compile_shared do
+  wflags = "-Wall -Wextra -Wmissing-prototypes -Wdiv-by-zero"\
+    " -Wbad-function-cast -Wcast-align -Wcast-qual -Wfloat-equal"\
+    " -Wmissing-declarations -Wnested-externs -Wno-unknown-pragmas"\
+    " -Wpointer-arith -Wredundant-decls -Wstrict-prototypes -Wswitch-enum"\
+    " -Wno-type-limits"
+
+  cflags = "-O3 -march=native -fPIC -fno-exceptions #{wflags}"
+  cwd = ::File.expand_path(::File.dirname(__FILE__))
+
+  ::Dir.chdir(cwd) do
+    # main.o: main.c
+    #   $(CC) -c $(CFLAGS) $< -o $@
+    sys("cc -c #{cflags} main.c -o main.o")
+
+    # main.dylib: main.o
+    # 	$(CC) $< -shared -o $@
+    sys("cc main.o -shared -o main.#{::FFI::Platform::LIBSUFFIX}")
+  end
+end
+
+task :default => [:compile_shared]
