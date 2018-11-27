@@ -14,7 +14,7 @@
  * If you are ripping this out of the library, comment out the next
  * line and uncomment the next lines as approrpiate
  */
-#include "config.h"
+// #include "config.h"
 
 /* public header */
 #include "modp_b64r.h"
