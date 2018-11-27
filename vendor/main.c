@@ -89,7 +89,11 @@ size_t decode_decrypt(char* dest, const void* message, size_t message_len,
                       const uint8_t key[hydro_secretbox_KEYBYTES]) {
   int max_decoded_len = modp_b64_decode_len(message_len);
   char* decoded[max_decoded_len];
-  int decoded_len = modp_b64_decode(decoded, message, message_len);
+  size_t decoded_len = modp_b64_decode(decoded, message, message_len);
+
+  if (decoded_len == 0 || decoded_len == (size_t)-1) {
+    return 0;
+  }
 
   // TODO I'm making the assumption that a char* is a safe substitute for the
   // uint8_t* as expected by hydro_secretbox_decrypt. Make sure this is
