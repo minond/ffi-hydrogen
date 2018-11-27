@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/minond/ffi-hydrogen.svg?branch=master)](https://travis-ci.org/minond/ffi-hydrogen)
+
 # FFI::Hydrogen
 
 Combine [libhydrogen](https://github.com/jedisct1/libhydrogen) with a good
