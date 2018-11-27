@@ -2,13 +2,13 @@ lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
-  spec.name          = "ffi-hydrogen_encoder"
+  spec.name          = "ffi-hydrogen"
   spec.version       = "0.1.0"
   spec.authors       = ["Marcos Minond"]
   spec.email         = ["marcos.minond@mx.com"]
 
   spec.summary       = "libhydrogen + encoding = cryptographically sound, URL safe string = libhydrogen + encoding"
-  spec.homepage      = "https://gitlab.mx.com/Marcos.Minond/ffi-hydrogen_encoder"
+  spec.homepage      = "https://gitlab.mx.com/Marcos.Minond/ffi-hydrogen"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
   # to allow pushing to a single host or delete this section to allow pushing to any host.

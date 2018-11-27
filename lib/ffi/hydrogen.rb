@@ -1,7 +1,7 @@
 require "ffi"
 
 module FFI
-  module HydrogenEncoder
+  module Hydrogen
     extend FFI::Library
 
     # define hydro_secretbox_KEYBYTES 32
@@ -82,7 +82,7 @@ module FFI
       buff_len = modp_b64_encode_len(text_len)
 
       create_string_and_buffer(text, buff_len) do |text_ptr, buff_ptr|
-        size = ::FFI::HydrogenEncoder._modp_b64_encode(buff_ptr, text_ptr, text_len)
+        size = ::FFI::Hydrogen._modp_b64_encode(buff_ptr, text_ptr, text_len)
         encoded = buff_ptr.get_bytes(0, size)
       end
 
@@ -95,7 +95,7 @@ module FFI
       buff_len = modp_b64_decode_len(text_len)
 
       create_string_and_buffer(text, buff_len) do |text_ptr, buff_ptr|
-        size = ::FFI::HydrogenEncoder._modp_b64_decode(buff_ptr, text_ptr, text_len)
+        size = ::FFI::Hydrogen._modp_b64_decode(buff_ptr, text_ptr, text_len)
         decoded = buff_ptr.get_bytes(0, size)
       end
 
@@ -114,7 +114,7 @@ module FFI
       key = nil
 
       ::FFI::MemoryPointer.new(:char, KEYBYTES) do |buff|
-        ::FFI::HydrogenEncoder._hydro_secretbox_keygen(buff)
+        ::FFI::Hydrogen._hydro_secretbox_keygen(buff)
         key = buff.get_bytes(0, KEYBYTES)
       end
 
@@ -131,7 +131,7 @@ module FFI
 
           create_context(context) do |context_ptr|
             create_key(key) do |key_ptr|
-              ::FFI::HydrogenEncoder._hydro_secretbox_encrypt(cipher_ptr, text_ptr, text.bytesize, message_id, context_ptr, key_ptr)
+              ::FFI::Hydrogen._hydro_secretbox_encrypt(cipher_ptr, text_ptr, text.bytesize, message_id, context_ptr, key_ptr)
               encrypted = cipher_ptr.get_bytes(0, cipher_len)
             end
           end
@@ -151,7 +151,7 @@ module FFI
 
           create_context(context) do |context_ptr|
             create_key(key) do |key_ptr|
-              ::FFI::HydrogenEncoder._hydro_secretbox_decrypt(text_ptr, cipher_ptr, cipher_text.bytesize, message_id, context_ptr, key_ptr)
+              ::FFI::Hydrogen._hydro_secretbox_decrypt(text_ptr, cipher_ptr, cipher_text.bytesize, message_id, context_ptr, key_ptr)
               encrypted = text_ptr.get_bytes(0, cipher_len)
             end
           end
@@ -197,19 +197,19 @@ module FFI
       end
 
       def encrypt(text, message_id = 0)
-        ::FFI::HydrogenEncoder.hydro_secretbox_encrypt(text, @context_ptr, @key_ptr, message_id)
+        ::FFI::Hydrogen.hydro_secretbox_encrypt(text, @context_ptr, @key_ptr, message_id)
       end
 
       def decrypt(text, message_id = 0)
-        ::FFI::HydrogenEncoder.hydro_secretbox_decrypt(text, @context_ptr, @key_ptr, message_id)
+        ::FFI::Hydrogen.hydro_secretbox_decrypt(text, @context_ptr, @key_ptr, message_id)
       end
 
       def encrypt_encode(text, message_id = 0)
-        ::FFI::HydrogenEncoder.encrypt_encode(text, @context_ptr, @key_ptr, message_id)
+        ::FFI::Hydrogen.encrypt_encode(text, @context_ptr, @key_ptr, message_id)
       end
 
       def decode_decrypt(text, message_id = 0)
-        ::FFI::HydrogenEncoder.decode_decrypt(text, @context_ptr, @key_ptr, message_id)
+        ::FFI::Hydrogen.decode_decrypt(text, @context_ptr, @key_ptr, message_id)
       end
     end
   end

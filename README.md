@@ -1,4 +1,4 @@
-# FFI::HydrogenEncoder
+# FFI::Hydrogen
 
 Combine [libhydrogen](https://github.com/jedisct1/libhydrogen) with a good
 implementation of string encoding in C, Nick Galbreath's
@@ -11,7 +11,7 @@ that is URL safe.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem "ffi-hydrogen_encoder"
+gem "ffi-hydrogen"
 ```
 
 And then execute:
@@ -20,19 +20,19 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install ffi-hydrogen_encoder
+    $ gem install ffi-hydrogen
 
 ## Usage
 
 ```ruby
-key = ::FFI::HydrogenEncoder.hydro_secretbox_keygen
+key = ::FFI::Hydrogen.hydro_secretbox_keygen
 context = "examples"
 
 message = "0123456789"
-encrypted = ::FFI::HydrogenEncoder.hydro_secretbox_encrypt(message, context, key)
-encoded = ::FFI::HydrogenEncoder.modp_b64_encode(encrypted)
-decoded = ::FFI::HydrogenEncoder.modp_b64_decode(encoded)
-decrypted = ::FFI::HydrogenEncoder.hydro_secretbox_decrypt(decoded, context, key)
+encrypted = ::FFI::Hydrogen.hydro_secretbox_encrypt(message, context, key)
+encoded = ::FFI::Hydrogen.modp_b64_encode(encrypted)
+decoded = ::FFI::Hydrogen.modp_b64_decode(encoded)
+decrypted = ::FFI::Hydrogen.hydro_secretbox_decrypt(decoded, context, key)
 
 puts "message: #{message}"
 puts "encrypted: #{encrypted}"
@@ -41,12 +41,12 @@ puts "decoded: #{decoded}"
 puts "decrypted: #{decrypted}"
 ```
 
-### `::FFI::HydrogenEncoder::Secretbox`
+### `::FFI::Hydrogen::Secretbox`
 
 ```ruby
 ctx = "examples"
-key = ::FFI::HydrogenEncoder.hydro_secretbox_keygen
-box = ::FFI::HydrogenEncoder::Secretbox.new(ctx, key)
+key = ::FFI::Hydrogen.hydro_secretbox_keygen
+box = ::FFI::Hydrogen::Secretbox.new(ctx, key)
 
 message = "0123456789"
 boxed = box.encrypt_encode(message)

@@ -1,7 +1,7 @@
 require "benchmark/ips"
 require "rbnacl"
 
-require "ffi/hydrogen_encoder"
+require "ffi/hydrogen"
 
 require_relative "./init.rb"
 
@@ -10,9 +10,9 @@ def suite(str)
 
   label = "#{str.size}_char"
 
-  hydrogen_key = ::FFI::HydrogenEncoder.hydro_secretbox_keygen
+  hydrogen_key = ::FFI::Hydrogen.hydro_secretbox_keygen
   hydrogen_context = "benched1"
-  hydrogen_box = ::FFI::HydrogenEncoder::Secretbox.new(hydrogen_context, hydrogen_key)
+  hydrogen_box = ::FFI::Hydrogen::Secretbox.new(hydrogen_context, hydrogen_key)
   hydrogen_encrypted = hydrogen_box.encrypt(str)
 
   rbnacl_key = ::RbNaCl::Random.random_bytes(::RbNaCl::SecretBox.key_bytes)
@@ -26,7 +26,7 @@ def suite(str)
     b.report("hydro_secretbox_encrypt_#{label}") do |n|
       i = 0
       while i < n
-        ::FFI::HydrogenEncoder.hydro_secretbox_encrypt(str, hydrogen_context, hydrogen_key)
+        ::FFI::Hydrogen.hydro_secretbox_encrypt(str, hydrogen_context, hydrogen_key)
         i += 1
       end
     end
@@ -34,7 +34,7 @@ def suite(str)
     b.report("hydro_secretbox_decrypt_#{label}") do |n|
       i = 0
       while i < n
-        ::FFI::HydrogenEncoder.hydro_secretbox_decrypt(hydrogen_encrypted, hydrogen_context, hydrogen_key)
+        ::FFI::Hydrogen.hydro_secretbox_decrypt(hydrogen_encrypted, hydrogen_context, hydrogen_key)
         i += 1
       end
     end

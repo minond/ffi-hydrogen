@@ -1,7 +1,7 @@
 require "base64"
 require "benchmark/ips"
 
-require "ffi/hydrogen_encoder"
+require "ffi/hydrogen"
 
 require_relative "./init.rb"
 
@@ -10,7 +10,7 @@ def suite(str)
 
   label = "#{str.size}_char"
 
-  encoded = ::FFI::HydrogenEncoder.modp_b64_encode(str)
+  encoded = ::FFI::Hydrogen.modp_b64_encode(str)
 
   Benchmark.ips do |b|
     b.time = 2
@@ -19,7 +19,7 @@ def suite(str)
     b.report("modp_b64_encode_#{label}") do |n|
       i = 0
       while i < n
-        ::FFI::HydrogenEncoder.modp_b64_encode(str)
+        ::FFI::Hydrogen.modp_b64_encode(str)
         i += 1
       end
     end
@@ -27,7 +27,7 @@ def suite(str)
     b.report("modp_b64_decode_#{label}") do |n|
       i = 0
       while i < n
-        ::FFI::HydrogenEncoder.modp_b64_decode(encoded)
+        ::FFI::Hydrogen.modp_b64_decode(encoded)
         i += 1
       end
     end

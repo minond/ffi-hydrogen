@@ -3,7 +3,7 @@ require "benchmark/ips"
 require "rbnacl"
 require "urlcrypt"
 
-require "ffi/hydrogen_encoder"
+require "ffi/hydrogen"
 
 require_relative "./init.rb"
 
@@ -12,9 +12,9 @@ def suite(str)
 
   label = "#{str.size}_char"
 
-  hydrogen_key = ::FFI::HydrogenEncoder.hydro_secretbox_keygen
+  hydrogen_key = ::FFI::Hydrogen.hydro_secretbox_keygen
   hydrogen_context = "benched1"
-  hydrogen_box = ::FFI::HydrogenEncoder::Secretbox.new(hydrogen_context, hydrogen_key)
+  hydrogen_box = ::FFI::Hydrogen::Secretbox.new(hydrogen_context, hydrogen_key)
   hydrogen_encrypted_encoded = hydrogen_box.encrypt_encode(str)
 
   rbnacl_key = ::RbNaCl::Random.random_bytes(::RbNaCl::SecretBox.key_bytes)
