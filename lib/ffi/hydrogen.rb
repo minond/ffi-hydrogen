@@ -52,7 +52,7 @@ module FFI
         create_context(context) do |context_ptr|
           create_string_and_buffer(text, max_len) do |text_ptr, buff_ptr|
             size = _encrypt_encode(buff_ptr, text_ptr, text_len, message_id, context_ptr, key_ptr)
-            result = buff_ptr.get_bytes(0, size)
+            result = buff_ptr.get_bytes(0, size) if size != 0
           end
         end
       end
@@ -68,8 +68,10 @@ module FFI
       create_key(key) do |key_ptr|
         create_context(context) do |context_ptr|
           create_string_and_buffer(text, max_len) do |text_ptr, buff_ptr|
+            # binding.pry
+
             size = _decode_decrypt(buff_ptr, text_ptr, text_len, message_id, context_ptr, key_ptr)
-            result = buff_ptr.get_bytes(0, size)
+            result = buff_ptr.get_bytes(0, size) if size != 0
           end
         end
       end
@@ -84,7 +86,7 @@ module FFI
 
       create_string_and_buffer(text, buff_len) do |text_ptr, buff_ptr|
         size = ::FFI::Hydrogen._modp_b64_encode(buff_ptr, text_ptr, text_len)
-        encoded = buff_ptr.get_bytes(0, size)
+        encoded = buff_ptr.get_bytes(0, size) if size != 0
       end
 
       encoded
@@ -97,7 +99,7 @@ module FFI
 
       create_string_and_buffer(text, buff_len) do |text_ptr, buff_ptr|
         size = ::FFI::Hydrogen._modp_b64_decode(buff_ptr, text_ptr, text_len)
-        decoded = buff_ptr.get_bytes(0, size)
+        decoded = buff_ptr.get_bytes(0, size) if size != 0
       end
 
       decoded
