@@ -2,7 +2,7 @@ require "bundler/gem_tasks"
 require "rspec/core/rake_task"
 require "rubocop/rake_task"
 
-import "vendor/Rakefile"
+import "ext/ffi/hydrogen/Rakefile"
 
 RSpec::Core::RakeTask.new(:spec)
 

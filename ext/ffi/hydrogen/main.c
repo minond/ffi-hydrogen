@@ -1,7 +1,7 @@
 #include <stdio.h>
 
-#include "libhydrogen/hydrogen.c"
-#include "stringencoders/src/modp_b64.c"
+#include "../../../vendor/libhydrogen/hydrogen.c"
+#include "../../../vendor/stringencoders/src/modp_b64.c"
 
 /**
  * Encrypts and encodes a message using hydro_secretbox_encrypt and

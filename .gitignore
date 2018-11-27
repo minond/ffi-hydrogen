@@ -11,3 +11,6 @@
 .rspec_status
 .ruby-version
 Gemfile.lock
+
+ext/ffi/hydrogen/main.o
+ext/ffi/hydrogen/main.dylib

@@ -10,7 +10,7 @@ module FFI
     HEADERBYTES = 36
 
     gem_base = ::File.join(::File.dirname(__FILE__), "..", "..")
-    ffi_lib "#{gem_base}/vendor/main.#{::FFI::Platform::LIBSUFFIX}"
+    ffi_lib "#{gem_base}/ext/ffi/hydrogen/main.#{::FFI::Platform::LIBSUFFIX}"
 
     # void hydro_secretbox_keygen(uint8_t key[hydro_secretbox_KEYBYTES])
     attach_function :_hydro_secretbox_keygen, :hydro_secretbox_keygen, [:pointer], :void
