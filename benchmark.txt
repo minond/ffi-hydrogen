@@ -1,0 +1,572 @@
+ruby 2.3.1p112 (2016-04-26 revision 54768) [x86_64-darwin17]
+============================ Test string length: 10 ============================
+Warming up --------------------------------------
+Boxed Hydrogen encrypt_encode (10 characters)
+                        21.573k i/100ms
+Boxed Hydrogen decode_decrypt (10 characters)
+                        28.809k i/100ms
+Boxed Hydrogen encrypt + Base64 encode (10 characters)
+                        19.855k i/100ms
+Boxed Hydrogen decrypt + Base64 decode (10 characters)
+                        22.258k i/100ms
+URLcrypt decrypt (10 characters)
+                         1.677k i/100ms
+URLcrypt decrypt (10 characters)
+                         1.359k i/100ms
+Boxed RbNaCl encrypt + Base64 encode (10 characters)
+                         9.279k i/100ms
+Boxed RbNaCl decrypt + Base64 decode (10 characters)
+                        17.470k i/100ms
+modp_b64_encode (10 characters)
+                        42.092k i/100ms
+modp_b64_decode (10 characters)
+                        40.998k i/100ms
+Base64 encode (10 characters)
+                       125.956k i/100ms
+Base64 decode (10 characters)
+                       178.979k i/100ms
+hydro_secretbox_encrypt (10 characters)
+                        17.136k i/100ms
+hydro_secretbox_decrypt (10 characters)
+                        20.593k i/100ms
+Boxed Hydrogen encrypt (10 characters)
+                        23.083k i/100ms
+Boxed Hydrogen decrypt (10 characters)
+                        30.098k i/100ms
+Boxed RbNaCl encrypt (10 characters)
+                         9.951k i/100ms
+Boxed RbNaCl decrypt (10 characters)
+                        20.269k i/100ms
+Calculating -------------------------------------
+Boxed Hydrogen encrypt_encode (10 characters)
+                        252.162k (± 1.6%) i/s -    517.752k in   2.053751s
+Boxed Hydrogen decode_decrypt (10 characters)
+                        316.936k (± 6.4%) i/s -    662.607k in   2.100069s
+Boxed Hydrogen encrypt + Base64 encode (10 characters)
+                        213.462k (± 8.0%) i/s -    436.810k in   2.064163s
+Boxed Hydrogen decrypt + Base64 decode (10 characters)
+                        263.182k (± 8.3%) i/s -    534.192k in   2.045270s
+URLcrypt decrypt (10 characters)
+                         17.035k (± 8.6%) i/s -     35.217k in   2.086145s
+URLcrypt decrypt (10 characters)
+                         14.290k (± 3.6%) i/s -     29.898k in   2.095083s
+Boxed RbNaCl encrypt + Base64 encode (10 characters)
+                        100.153k (± 1.5%) i/s -    204.138k in   2.038715s
+Boxed RbNaCl decrypt + Base64 decode (10 characters)
+                        193.427k (± 2.1%) i/s -    401.810k in   2.078248s
+modp_b64_encode (10 characters)
+                        522.342k (± 1.0%) i/s -      1.052M in   2.014775s
+modp_b64_decode (10 characters)
+                        521.937k (± 1.8%) i/s -      1.066M in   2.042966s
+Base64 encode (10 characters)
+                          2.337M (± 3.4%) i/s -      4.786M in   2.050232s
+Base64 decode (10 characters)
+                          4.591M (± 2.1%) i/s -      9.307M in   2.028341s
+hydro_secretbox_encrypt (10 characters)
+                        184.954k (± 2.1%) i/s -    376.992k in   2.039282s
+hydro_secretbox_decrypt (10 characters)
+                        218.576k (± 6.2%) i/s -    453.046k in   2.081367s
+Boxed Hydrogen encrypt (10 characters)
+                        246.691k (± 3.2%) i/s -    507.826k in   2.060654s
+Boxed Hydrogen decrypt (10 characters)
+                        337.057k (± 5.4%) i/s -    692.254k in   2.060321s
+Boxed RbNaCl encrypt (10 characters)
+                        107.833k (± 1.4%) i/s -    218.922k in   2.030618s
+Boxed RbNaCl decrypt (10 characters)
+                        226.481k (± 1.8%) i/s -    466.187k in   2.059060s
+
+Comparison:
+Base64 decode (10 characters):  4590552.8 i/s
+Base64 encode (10 characters):  2337407.8 i/s - 1.96x  slower
+modp_b64_encode (10 characters):   522342.2 i/s - 8.79x  slower
+modp_b64_decode (10 characters):   521937.0 i/s - 8.80x  slower
+Boxed Hydrogen decrypt (10 characters):   337057.5 i/s - 13.62x  slower
+Boxed Hydrogen decode_decrypt (10 characters):   316935.6 i/s - 14.48x  slower
+Boxed Hydrogen decrypt + Base64 decode (10 characters):   263182.3 i/s - 17.44x  slower
+Boxed Hydrogen encrypt_encode (10 characters):   252162.4 i/s - 18.20x  slower
+Boxed Hydrogen encrypt (10 characters):   246691.4 i/s - 18.61x  slower
+Boxed RbNaCl decrypt (10 characters):   226481.5 i/s - 20.27x  slower
+hydro_secretbox_decrypt (10 characters):   218576.1 i/s - 21.00x  slower
+Boxed Hydrogen encrypt + Base64 encode (10 characters):   213461.9 i/s - 21.51x  slower
+Boxed RbNaCl decrypt + Base64 decode (10 characters):   193427.4 i/s - 23.73x  slower
+hydro_secretbox_encrypt (10 characters):   184953.8 i/s - 24.82x  slower
+Boxed RbNaCl encrypt (10 characters):   107833.3 i/s - 42.57x  slower
+Boxed RbNaCl encrypt + Base64 encode (10 characters):   100153.1 i/s - 45.84x  slower
+URLcrypt decrypt (10 characters):    14290.3 i/s - 321.24x  slower
+
+============================ Test string length: 50 ============================
+Warming up --------------------------------------
+Boxed Hydrogen encrypt_encode (50 characters)
+                        20.093k i/100ms
+Boxed Hydrogen decode_decrypt (50 characters)
+                        25.187k i/100ms
+Boxed Hydrogen encrypt + Base64 encode (50 characters)
+                        17.855k i/100ms
+Boxed Hydrogen decrypt + Base64 decode (50 characters)
+                        21.604k i/100ms
+URLcrypt decrypt (50 characters)
+                       874.000  i/100ms
+URLcrypt decrypt (50 characters)
+                       656.000  i/100ms
+Boxed RbNaCl encrypt + Base64 encode (50 characters)
+                         8.726k i/100ms
+Boxed RbNaCl decrypt + Base64 decode (50 characters)
+                        14.748k i/100ms
+modp_b64_encode (50 characters)
+                        37.331k i/100ms
+modp_b64_decode (50 characters)
+                        35.980k i/100ms
+Base64 encode (50 characters)
+                       112.389k i/100ms
+Base64 decode (50 characters)
+                       111.234k i/100ms
+hydro_secretbox_encrypt (50 characters)
+                        15.481k i/100ms
+hydro_secretbox_decrypt (50 characters)
+                        18.052k i/100ms
+Boxed Hydrogen encrypt (50 characters)
+                        20.260k i/100ms
+Boxed Hydrogen decrypt (50 characters)
+                        26.027k i/100ms
+Boxed RbNaCl encrypt (50 characters)
+                         9.613k i/100ms
+Boxed RbNaCl decrypt (50 characters)
+                        17.026k i/100ms
+Calculating -------------------------------------
+Boxed Hydrogen encrypt_encode (50 characters)
+                        215.260k (± 4.9%) i/s -    442.046k in   2.058848s
+Boxed Hydrogen decode_decrypt (50 characters)
+                        285.435k (± 1.3%) i/s -    579.301k in   2.029896s
+Boxed Hydrogen encrypt + Base64 encode (50 characters)
+                        187.919k (± 3.8%) i/s -    392.810k in   2.093306s
+Boxed Hydrogen decrypt + Base64 decode (50 characters)
+                        235.645k (± 4.8%) i/s -    475.288k in   2.022049s
+URLcrypt decrypt (50 characters)
+                          8.466k (± 3.7%) i/s -     17.480k in   2.067446s
+URLcrypt decrypt (50 characters)
+                          6.200k (± 3.6%) i/s -     12.464k in   2.013105s
+Boxed RbNaCl encrypt + Base64 encode (50 characters)
+                         95.149k (± 3.4%) i/s -    191.972k in   2.019996s
+Boxed RbNaCl decrypt + Base64 decode (50 characters)
+                        173.688k (± 2.2%) i/s -    353.952k in   2.038823s
+modp_b64_encode (50 characters)
+                        448.039k (± 1.8%) i/s -    895.944k in   2.000340s
+modp_b64_decode (50 characters)
+                        446.412k (± 3.4%) i/s -    899.500k in   2.017499s
+Base64 encode (50 characters)
+                          1.993M (± 4.2%) i/s -      4.046M in   2.033397s
+Base64 decode (50 characters)
+                          1.989M (± 3.6%) i/s -      4.004M in   2.015453s
+hydro_secretbox_encrypt (50 characters)
+                        167.432k (± 5.5%) i/s -    340.582k in   2.041290s
+hydro_secretbox_decrypt (50 characters)
+                        202.347k (± 4.1%) i/s -    415.196k in   2.055553s
+Boxed Hydrogen encrypt (50 characters)
+                        232.932k (± 1.8%) i/s -    465.980k in   2.001115s
+Boxed Hydrogen decrypt (50 characters)
+                        303.238k (± 3.0%) i/s -    624.648k in   2.061856s
+Boxed RbNaCl encrypt (50 characters)
+                        102.299k (± 3.5%) i/s -    211.486k in   2.069951s
+Boxed RbNaCl decrypt (50 characters)
+                        198.379k (± 4.0%) i/s -    408.624k in   2.063514s
+
+Comparison:
+Base64 encode (50 characters):  1993441.3 i/s
+Base64 decode (50 characters):  1989450.2 i/s - same-ish: difference falls within error
+modp_b64_encode (50 characters):   448039.1 i/s - 4.45x  slower
+modp_b64_decode (50 characters):   446411.5 i/s - 4.47x  slower
+Boxed Hydrogen decrypt (50 characters):   303237.7 i/s - 6.57x  slower
+Boxed Hydrogen decode_decrypt (50 characters):   285434.6 i/s - 6.98x  slower
+Boxed Hydrogen decrypt + Base64 decode (50 characters):   235644.6 i/s - 8.46x  slower
+Boxed Hydrogen encrypt (50 characters):   232932.1 i/s - 8.56x  slower
+Boxed Hydrogen encrypt_encode (50 characters):   215259.9 i/s - 9.26x  slower
+hydro_secretbox_decrypt (50 characters):   202347.0 i/s - 9.85x  slower
+Boxed RbNaCl decrypt (50 characters):   198379.0 i/s - 10.05x  slower
+Boxed Hydrogen encrypt + Base64 encode (50 characters):   187918.6 i/s - 10.61x  slower
+Boxed RbNaCl decrypt + Base64 decode (50 characters):   173688.3 i/s - 11.48x  slower
+hydro_secretbox_encrypt (50 characters):   167432.1 i/s - 11.91x  slower
+Boxed RbNaCl encrypt (50 characters):   102298.7 i/s - 19.49x  slower
+Boxed RbNaCl encrypt + Base64 encode (50 characters):    95149.3 i/s - 20.95x  slower
+URLcrypt decrypt (50 characters):     6199.7 i/s - 321.54x  slower
+
+============================ Test string length: 100 ============================
+Warming up --------------------------------------
+Boxed Hydrogen encrypt_encode (100 characters)
+                        17.506k i/100ms
+Boxed Hydrogen decode_decrypt (100 characters)
+                        22.896k i/100ms
+Boxed Hydrogen encrypt + Base64 encode (100 characters)
+                        14.923k i/100ms
+Boxed Hydrogen decrypt + Base64 decode (100 characters)
+                        19.905k i/100ms
+URLcrypt decrypt (100 characters)
+                       572.000  i/100ms
+URLcrypt decrypt (100 characters)
+                       423.000  i/100ms
+Boxed RbNaCl encrypt + Base64 encode (100 characters)
+                         8.262k i/100ms
+Boxed RbNaCl decrypt + Base64 decode (100 characters)
+                        14.280k i/100ms
+modp_b64_encode (100 characters)
+                        34.924k i/100ms
+modp_b64_decode (100 characters)
+                        35.889k i/100ms
+Base64 encode (100 characters)
+                        87.118k i/100ms
+Base64 decode (100 characters)
+                       104.319k i/100ms
+hydro_secretbox_encrypt (100 characters)
+                        14.179k i/100ms
+hydro_secretbox_decrypt (100 characters)
+                        17.697k i/100ms
+Boxed Hydrogen encrypt (100 characters)
+                        18.914k i/100ms
+Boxed Hydrogen decrypt (100 characters)
+                        24.777k i/100ms
+Boxed RbNaCl encrypt (100 characters)
+                         9.484k i/100ms
+Boxed RbNaCl decrypt (100 characters)
+                        17.033k i/100ms
+Calculating -------------------------------------
+Boxed Hydrogen encrypt_encode (100 characters)
+                        194.262k (± 2.5%) i/s -    402.638k in   2.073959s
+Boxed Hydrogen decode_decrypt (100 characters)
+                        263.256k (± 2.3%) i/s -    526.608k in   2.001392s
+Boxed Hydrogen encrypt + Base64 encode (100 characters)
+                        163.047k (± 2.1%) i/s -    328.306k in   2.014443s
+Boxed Hydrogen decrypt + Base64 decode (100 characters)
+                        219.835k (± 1.6%) i/s -    457.815k in   2.083056s
+URLcrypt decrypt (100 characters)
+                          5.546k (± 5.1%) i/s -     11.440k in   2.068242s
+URLcrypt decrypt (100 characters)
+                          3.972k (± 5.1%) i/s -      8.037k in   2.029004s
+Boxed RbNaCl encrypt + Base64 encode (100 characters)
+                         91.544k (± 1.6%) i/s -    190.026k in   2.076333s
+Boxed RbNaCl decrypt + Base64 decode (100 characters)
+                        163.167k (± 2.1%) i/s -    328.440k in   2.013833s
+modp_b64_encode (100 characters)
+                        430.719k (± 2.9%) i/s -    873.100k in   2.028797s
+modp_b64_decode (100 characters)
+                        445.905k (± 2.0%) i/s -    897.225k in   2.012919s
+Base64 encode (100 characters)
+                          1.259M (± 6.8%) i/s -      2.526M in   2.016033s
+Base64 decode (100 characters)
+                          1.694M (± 3.4%) i/s -      3.443M in   2.034358s
+hydro_secretbox_encrypt (100 characters)
+                        154.190k (± 4.3%) i/s -    311.938k in   2.027137s
+hydro_secretbox_decrypt (100 characters)
+                        198.795k (± 1.8%) i/s -    407.031k in   2.048137s
+Boxed Hydrogen encrypt (100 characters)
+                        205.974k (± 2.6%) i/s -    416.108k in   2.021562s
+Boxed Hydrogen decrypt (100 characters)
+                        276.793k (± 2.1%) i/s -    569.871k in   2.059745s
+Boxed RbNaCl encrypt (100 characters)
+                         97.566k (± 6.2%) i/s -    199.164k in   2.049960s
+Boxed RbNaCl decrypt (100 characters)
+                        195.296k (± 3.2%) i/s -    391.759k in   2.008041s
+
+Comparison:
+Base64 decode (100 characters):  1694236.8 i/s
+Base64 encode (100 characters):  1259363.5 i/s - 1.35x  slower
+modp_b64_decode (100 characters):   445905.1 i/s - 3.80x  slower
+modp_b64_encode (100 characters):   430719.0 i/s - 3.93x  slower
+Boxed Hydrogen decrypt (100 characters):   276793.3 i/s - 6.12x  slower
+Boxed Hydrogen decode_decrypt (100 characters):   263255.9 i/s - 6.44x  slower
+Boxed Hydrogen decrypt + Base64 decode (100 characters):   219834.6 i/s - 7.71x  slower
+Boxed Hydrogen encrypt (100 characters):   205974.1 i/s - 8.23x  slower
+hydro_secretbox_decrypt (100 characters):   198795.4 i/s - 8.52x  slower
+Boxed RbNaCl decrypt (100 characters):   195295.5 i/s - 8.68x  slower
+Boxed Hydrogen encrypt_encode (100 characters):   194261.9 i/s - 8.72x  slower
+Boxed RbNaCl decrypt + Base64 decode (100 characters):   163166.6 i/s - 10.38x  slower
+Boxed Hydrogen encrypt + Base64 encode (100 characters):   163047.1 i/s - 10.39x  slower
+hydro_secretbox_encrypt (100 characters):   154189.7 i/s - 10.99x  slower
+Boxed RbNaCl encrypt (100 characters):    97566.3 i/s - 17.36x  slower
+Boxed RbNaCl encrypt + Base64 encode (100 characters):    91543.8 i/s - 18.51x  slower
+URLcrypt decrypt (100 characters):     3971.7 i/s - 426.57x  slower
+
+jruby 9.1.12.0 (2.3.3) 2017-06-15 33c6439 Java HotSpot(TM) 64-Bit Server VM 25.171-b11 on 1.8.0_171-b11 +jit [darwin-x86_64]
+============================ Test string length: 10 ============================
+Warming up --------------------------------------
+Boxed Hydrogen encrypt_encode (10 characters)
+                        12.150k i/100ms
+Boxed Hydrogen decode_decrypt (10 characters)
+                        22.730k i/100ms
+Boxed Hydrogen encrypt + Base64 encode (10 characters)
+                        15.278k i/100ms
+Boxed Hydrogen decrypt + Base64 decode (10 characters)
+                        15.877k i/100ms
+URLcrypt decrypt (10 characters)
+                       657.000  i/100ms
+URLcrypt decrypt (10 characters)
+                       965.000  i/100ms
+Boxed RbNaCl encrypt + Base64 encode (10 characters)
+                         6.613k i/100ms
+Boxed RbNaCl decrypt + Base64 decode (10 characters)
+                        16.166k i/100ms
+modp_b64_encode (10 characters)
+                        46.307k i/100ms
+modp_b64_decode (10 characters)
+                        46.508k i/100ms
+Base64 encode (10 characters)
+                       132.681k i/100ms
+Base64 decode (10 characters)
+                       139.898k i/100ms
+hydro_secretbox_encrypt (10 characters)
+                        17.525k i/100ms
+hydro_secretbox_decrypt (10 characters)
+                        21.748k i/100ms
+Boxed Hydrogen encrypt (10 characters)
+                        25.446k i/100ms
+Boxed Hydrogen decrypt (10 characters)
+                        31.024k i/100ms
+Boxed RbNaCl encrypt (10 characters)
+                        10.056k i/100ms
+Boxed RbNaCl decrypt (10 characters)
+                        22.062k i/100ms
+Calculating -------------------------------------
+Boxed Hydrogen encrypt_encode (10 characters)
+                        287.688k (±11.1%) i/s -    571.050k in   2.021035s
+Boxed Hydrogen decode_decrypt (10 characters)
+                        382.277k (± 7.5%) i/s -    772.820k in   2.037475s
+Boxed Hydrogen encrypt + Base64 encode (10 characters)
+                        275.547k (± 9.8%) i/s -    550.008k in   2.025774s
+Boxed Hydrogen decrypt + Base64 decode (10 characters)
+                        381.730k (± 7.6%) i/s -    762.096k in   2.012316s
+URLcrypt decrypt (10 characters)
+                         20.220k (± 8.6%) i/s -     40.077k in   2.004832s
+URLcrypt decrypt (10 characters)
+                         25.012k (± 6.3%) i/s -     50.180k in   2.018211s
+Boxed RbNaCl encrypt + Base64 encode (10 characters)
+                        119.785k (± 1.5%) i/s -    244.681k in   2.043102s
+Boxed RbNaCl decrypt + Base64 decode (10 characters)
+                        244.989k (± 2.6%) i/s -    501.146k in   2.046983s
+modp_b64_encode (10 characters)
+                        791.206k (±11.6%) i/s -      1.574M in   2.037491s
+modp_b64_decode (10 characters)
+                        800.112k (±13.9%) i/s -      1.581M in   2.033213s
+Base64 encode (10 characters)
+                          4.877M (±10.7%) i/s -      9.686M in   2.023028s
+Base64 decode (10 characters)
+                          4.839M (± 8.9%) i/s -      9.653M in   2.014841s
+hydro_secretbox_encrypt (10 characters)
+                        248.409k (± 8.1%) i/s -    508.225k in   2.062781s
+hydro_secretbox_decrypt (10 characters)
+                        290.747k (±14.6%) i/s -    565.448k in   2.017905s
+Boxed Hydrogen encrypt (10 characters)
+                        308.316k (±12.5%) i/s -    610.704k in   2.026110s
+Boxed Hydrogen decrypt (10 characters)
+                        442.958k (± 6.0%) i/s -    899.696k in   2.041178s
+Boxed RbNaCl encrypt (10 characters)
+                        128.091k (± 3.1%) i/s -    261.456k in   2.043314s
+Boxed RbNaCl decrypt (10 characters)
+                        292.055k (± 3.0%) i/s -    595.674k in   2.041592s
+
+Comparison:
+Base64 encode (10 characters):  4877309.5 i/s
+Base64 decode (10 characters):  4838970.2 i/s - same-ish: difference falls within error
+modp_b64_decode (10 characters):   800112.3 i/s - 6.10x  slower
+modp_b64_encode (10 characters):   791206.1 i/s - 6.16x  slower
+Boxed Hydrogen decrypt (10 characters):   442958.5 i/s - 11.01x  slower
+Boxed Hydrogen decode_decrypt (10 characters):   382276.6 i/s - 12.76x  slower
+Boxed Hydrogen decrypt + Base64 decode (10 characters):   381729.7 i/s - 12.78x  slower
+Boxed Hydrogen encrypt (10 characters):   308315.6 i/s - 15.82x  slower
+Boxed RbNaCl decrypt (10 characters):   292055.1 i/s - 16.70x  slower
+hydro_secretbox_decrypt (10 characters):   290746.7 i/s - 16.78x  slower
+Boxed Hydrogen encrypt_encode (10 characters):   287688.0 i/s - 16.95x  slower
+Boxed Hydrogen encrypt + Base64 encode (10 characters):   275547.1 i/s - 17.70x  slower
+hydro_secretbox_encrypt (10 characters):   248409.4 i/s - 19.63x  slower
+Boxed RbNaCl decrypt + Base64 decode (10 characters):   244989.2 i/s - 19.91x  slower
+Boxed RbNaCl encrypt (10 characters):   128090.8 i/s - 38.08x  slower
+Boxed RbNaCl encrypt + Base64 encode (10 characters):   119785.5 i/s - 40.72x  slower
+URLcrypt decrypt (10 characters):    25012.0 i/s - 195.00x  slower
+
+============================ Test string length: 50 ============================
+Warming up --------------------------------------
+Boxed Hydrogen encrypt_encode (50 characters)
+                        21.032k i/100ms
+Boxed Hydrogen decode_decrypt (50 characters)
+                        26.402k i/100ms
+Boxed Hydrogen encrypt + Base64 encode (50 characters)
+                        19.139k i/100ms
+Boxed Hydrogen decrypt + Base64 decode (50 characters)
+                        27.446k i/100ms
+URLcrypt decrypt (50 characters)
+                         1.167k i/100ms
+URLcrypt decrypt (50 characters)
+                         1.148k i/100ms
+Boxed RbNaCl encrypt + Base64 encode (50 characters)
+                         9.294k i/100ms
+Boxed RbNaCl decrypt + Base64 decode (50 characters)
+                        18.473k i/100ms
+modp_b64_encode (50 characters)
+                        50.909k i/100ms
+modp_b64_decode (50 characters)
+                        48.420k i/100ms
+Base64 encode (50 characters)
+                       111.971k i/100ms
+Base64 decode (50 characters)
+                       122.505k i/100ms
+hydro_secretbox_encrypt (50 characters)
+                        19.626k i/100ms
+hydro_secretbox_decrypt (50 characters)
+                        23.010k i/100ms
+Boxed Hydrogen encrypt (50 characters)
+                        22.086k i/100ms
+Boxed Hydrogen decrypt (50 characters)
+                        30.393k i/100ms
+Boxed RbNaCl encrypt (50 characters)
+                        10.602k i/100ms
+Boxed RbNaCl decrypt (50 characters)
+                        21.462k i/100ms
+Calculating -------------------------------------
+Boxed Hydrogen encrypt_encode (50 characters)
+                        252.588k (± 5.1%) i/s -    504.768k in   2.003976s
+Boxed Hydrogen decode_decrypt (50 characters)
+                        337.169k (± 8.7%) i/s -    686.452k in   2.054257s
+Boxed Hydrogen encrypt + Base64 encode (50 characters)
+                        224.007k (± 7.4%) i/s -    459.336k in   2.064773s
+Boxed Hydrogen decrypt + Base64 decode (50 characters)
+                        316.608k (± 9.8%) i/s -    631.258k in   2.016766s
+URLcrypt decrypt (50 characters)
+                         11.739k (± 5.3%) i/s -     24.507k in   2.094053s
+URLcrypt decrypt (50 characters)
+                         10.651k (± 5.5%) i/s -     21.812k in   2.054504s
+Boxed RbNaCl encrypt + Base64 encode (50 characters)
+                        108.665k (± 4.0%) i/s -    223.056k in   2.056047s
+Boxed RbNaCl decrypt + Base64 decode (50 characters)
+                        220.761k (± 6.3%) i/s -    443.352k in   2.017719s
+modp_b64_encode (50 characters)
+                        734.157k (± 8.1%) i/s -      1.476M in   2.031843s
+modp_b64_decode (50 characters)
+                        758.413k (±10.6%) i/s -      1.501M in   2.010209s
+Base64 encode (50 characters)
+                          2.098M (±10.3%) i/s -      4.143M in   2.002847s
+Base64 decode (50 characters)
+                          2.589M (± 2.1%) i/s -      5.268M in   2.035185s
+hydro_secretbox_encrypt (50 characters)
+                        238.991k (± 2.0%) i/s -    490.650k in   2.053869s
+hydro_secretbox_decrypt (50 characters)
+                        295.545k (± 8.0%) i/s -    598.260k in   2.044677s
+Boxed Hydrogen encrypt (50 characters)
+                        288.842k (± 8.6%) i/s -    574.236k in   2.010738s
+Boxed Hydrogen decrypt (50 characters)
+                        406.861k (± 7.0%) i/s -    820.611k in   2.031823s
+Boxed RbNaCl encrypt (50 characters)
+                        124.316k (± 5.7%) i/s -    254.448k in   2.054893s
+Boxed RbNaCl decrypt (50 characters)
+                        281.933k (± 5.4%) i/s -    579.474k in   2.062261s
+
+Comparison:
+Base64 decode (50 characters):  2589472.9 i/s
+Base64 encode (50 characters):  2098319.4 i/s - 1.23x  slower
+modp_b64_decode (50 characters):   758412.9 i/s - 3.41x  slower
+modp_b64_encode (50 characters):   734157.5 i/s - 3.53x  slower
+Boxed Hydrogen decrypt (50 characters):   406860.5 i/s - 6.36x  slower
+Boxed Hydrogen decode_decrypt (50 characters):   337169.2 i/s - 7.68x  slower
+Boxed Hydrogen decrypt + Base64 decode (50 characters):   316607.9 i/s - 8.18x  slower
+hydro_secretbox_decrypt (50 characters):   295545.4 i/s - 8.76x  slower
+Boxed Hydrogen encrypt (50 characters):   288842.1 i/s - 8.97x  slower
+Boxed RbNaCl decrypt (50 characters):   281932.9 i/s - 9.18x  slower
+Boxed Hydrogen encrypt_encode (50 characters):   252588.4 i/s - 10.25x  slower
+hydro_secretbox_encrypt (50 characters):   238990.6 i/s - 10.84x  slower
+Boxed Hydrogen encrypt + Base64 encode (50 characters):   224006.9 i/s - 11.56x  slower
+Boxed RbNaCl decrypt + Base64 decode (50 characters):   220761.0 i/s - 11.73x  slower
+Boxed RbNaCl encrypt (50 characters):   124315.9 i/s - 20.83x  slower
+Boxed RbNaCl encrypt + Base64 encode (50 characters):   108664.7 i/s - 23.83x  slower
+URLcrypt decrypt (50 characters):    10651.1 i/s - 243.12x  slower
+
+============================ Test string length: 100 ============================
+Warming up --------------------------------------
+Boxed Hydrogen encrypt_encode (100 characters)
+                        19.580k i/100ms
+Boxed Hydrogen decode_decrypt (100 characters)
+                        25.774k i/100ms
+Boxed Hydrogen encrypt + Base64 encode (100 characters)
+                        16.043k i/100ms
+Boxed Hydrogen decrypt + Base64 decode (100 characters)
+                        23.199k i/100ms
+URLcrypt decrypt (100 characters)
+                       869.000  i/100ms
+URLcrypt decrypt (100 characters)
+                       745.000  i/100ms
+Boxed RbNaCl encrypt + Base64 encode (100 characters)
+                         8.906k i/100ms
+Boxed RbNaCl decrypt + Base64 decode (100 characters)
+                        17.173k i/100ms
+modp_b64_encode (100 characters)
+                        49.863k i/100ms
+modp_b64_decode (100 characters)
+                        47.775k i/100ms
+Base64 encode (100 characters)
+                        81.629k i/100ms
+Base64 decode (100 characters)
+                        83.427k i/100ms
+hydro_secretbox_encrypt (100 characters)
+                        17.649k i/100ms
+hydro_secretbox_decrypt (100 characters)
+                        22.800k i/100ms
+Boxed Hydrogen encrypt (100 characters)
+                        21.977k i/100ms
+Boxed Hydrogen decrypt (100 characters)
+                        28.951k i/100ms
+Boxed RbNaCl encrypt (100 characters)
+                        11.084k i/100ms
+Boxed RbNaCl decrypt (100 characters)
+                        23.949k i/100ms
+Calculating -------------------------------------
+Boxed Hydrogen encrypt_encode (100 characters)
+                        228.895k (± 7.7%) i/s -    469.920k in   2.070094s
+Boxed Hydrogen decode_decrypt (100 characters)
+                        310.900k (± 8.2%) i/s -    618.576k in   2.006875s
+Boxed Hydrogen encrypt + Base64 encode (100 characters)
+                        186.403k (± 6.7%) i/s -    385.032k in   2.077730s
+Boxed Hydrogen decrypt + Base64 decode (100 characters)
+                        275.827k (± 7.3%) i/s -    556.776k in   2.032482s
+URLcrypt decrypt (100 characters)
+                          8.774k (± 4.6%) i/s -     18.249k in   2.084782s
+URLcrypt decrypt (100 characters)
+                          7.435k (± 2.0%) i/s -     14.900k in   2.004813s
+Boxed RbNaCl encrypt + Base64 encode (100 characters)
+                        103.635k (± 1.8%) i/s -    213.744k in   2.063142s
+Boxed RbNaCl decrypt + Base64 decode (100 characters)
+                        199.801k (± 1.9%) i/s -    412.152k in   2.063602s
+modp_b64_encode (100 characters)
+                        684.488k (±12.0%) i/s -      1.346M in   2.002535s
+modp_b64_decode (100 characters)
+                        696.739k (± 9.0%) i/s -      1.385M in   2.008002s
+Base64 encode (100 characters)
+                          1.252M (± 9.6%) i/s -      2.530M in   2.054306s
+Base64 decode (100 characters)
+                          1.689M (± 2.0%) i/s -      3.421M in   2.026306s
+hydro_secretbox_encrypt (100 characters)
+                        215.897k (± 6.7%) i/s -    441.225k in   2.055476s
+hydro_secretbox_decrypt (100 characters)
+                        271.904k (± 9.9%) i/s -    547.200k in   2.041591s
+Boxed Hydrogen encrypt (100 characters)
+                        252.935k (± 3.1%) i/s -    505.471k in   2.000369s
+Boxed Hydrogen decrypt (100 characters)
+                        350.996k (± 7.6%) i/s -    723.775k in   2.079040s
+Boxed RbNaCl encrypt (100 characters)
+                        121.533k (± 8.7%) i/s -    243.848k in   2.025902s
+Boxed RbNaCl decrypt (100 characters)
+                        262.289k (± 7.9%) i/s -    526.878k in   2.023101s
+
+Comparison:
+Base64 decode (100 characters):  1688733.9 i/s
+Base64 encode (100 characters):  1252025.3 i/s - 1.35x  slower
+modp_b64_decode (100 characters):   696739.3 i/s - 2.42x  slower
+modp_b64_encode (100 characters):   684488.2 i/s - 2.47x  slower
+Boxed Hydrogen decrypt (100 characters):   350996.3 i/s - 4.81x  slower
+Boxed Hydrogen decode_decrypt (100 characters):   310900.1 i/s - 5.43x  slower
+Boxed Hydrogen decrypt + Base64 decode (100 characters):   275827.0 i/s - 6.12x  slower
+hydro_secretbox_decrypt (100 characters):   271903.8 i/s - 6.21x  slower
+Boxed RbNaCl decrypt (100 characters):   262289.4 i/s - 6.44x  slower
+Boxed Hydrogen encrypt (100 characters):   252935.0 i/s - 6.68x  slower
+Boxed Hydrogen encrypt_encode (100 characters):   228894.9 i/s - 7.38x  slower
+hydro_secretbox_encrypt (100 characters):   215897.1 i/s - 7.82x  slower
+Boxed RbNaCl decrypt + Base64 decode (100 characters):   199800.9 i/s - 8.45x  slower
+Boxed Hydrogen encrypt + Base64 encode (100 characters):   186402.6 i/s - 9.06x  slower
+Boxed RbNaCl encrypt (100 characters):   121532.8 i/s - 13.90x  slower
+Boxed RbNaCl encrypt + Base64 encode (100 characters):   103634.6 i/s - 16.30x  slower
+URLcrypt decrypt (100 characters):     7435.2 i/s - 227.13x  slower
+

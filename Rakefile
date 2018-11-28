@@ -16,11 +16,4 @@ task :rubocop do
   RuboCop::RakeTask.new
 end
 
-desc "Run all benchmarks"
-task :bench do
-  ruby "bench/both.rb"
-  ruby "bench/encode.rb"
-  ruby "bench/encrypt.rb"
-end
-
 task :default => [:compile, :rubocop, :spec]
