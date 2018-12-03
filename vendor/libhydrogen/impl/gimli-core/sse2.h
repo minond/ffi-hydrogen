@@ -1,4 +1,4 @@
-#include <tmmintrin.h>
+#include <x86intrin.h>
 
 #define S 9
 
