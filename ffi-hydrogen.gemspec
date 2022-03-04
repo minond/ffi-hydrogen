@@ -23,7 +23,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "ffi"
 
   spec.add_development_dependency "benchmark-ips", "~> 2.7.2"
-  spec.add_development_dependency "bundler", "~> 1.16"
+  spec.add_development_dependency "bundler"
   spec.add_development_dependency "mad_rubocop"
   spec.add_development_dependency "pry"
   spec.add_development_dependency "rake", "~> 10.0"
