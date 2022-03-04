@@ -15,7 +15,13 @@ task :compile_shared do
     " -Wpointer-arith -Wredundant-decls -Wstrict-prototypes -Wswitch-enum"\
     " -Wno-type-limits"
 
-  cflags = "-O3 -march=native -fPIC -fno-exceptions #{wflags}"
+  cpuflag = if RUBY_PLATFORM =~ /arm64/ && RUBY_PLATFORM =- /darwin/
+              "-mcpu=apple-m1"
+            else
+              "-march=native"
+            end
+
+  cflags = "-O3 #{cpuflag} -fPIC -fno-exceptions #{wflags}"
   cwd = ::File.expand_path(::File.dirname(__FILE__))
 
   ::Dir.chdir(cwd) do
