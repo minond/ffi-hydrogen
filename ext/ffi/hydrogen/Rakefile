@@ -15,7 +15,7 @@ task :compile_shared do
     " -Wpointer-arith -Wredundant-decls -Wstrict-prototypes -Wswitch-enum"\
     " -Wno-type-limits"
 
-  cpuflag = if RUBY_PLATFORM =~ /arm64/ && RUBY_PLATFORM =- /darwin/
+  cpuflag = if RUBY_PLATFORM =~ /arm64/ && RUBY_PLATFORM =~ /darwin/
               "-mcpu=apple-m1"
             else
               "-march=native"
@@ -30,7 +30,7 @@ task :compile_shared do
     sys("cc -c #{cflags} main.c -o main.o")
 
     # main.dylib: main.o
-    # 	$(CC) $< -shared -o $@
+    #   $(CC) $< -shared -o $@
     sys("cc main.o -shared -o main.#{::FFI::Platform::LIBSUFFIX}")
   end
 end
