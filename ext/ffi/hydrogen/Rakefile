@@ -15,7 +15,9 @@ task :compile_shared do
     " -Wpointer-arith -Wredundant-decls -Wstrict-prototypes -Wswitch-enum"\
     " -Wno-type-limits"
 
-  cpuflag = if RUBY_PLATFORM =~ /arm64/ && RUBY_PLATFORM =~ /darwin/
+  rbconfig = RbConfig::CONFIG
+
+  cpuflag = if rbconfig["host_cpu"] =~ /arm64/ && rbconfig["host_os"] =~ /darwin/
               "-mcpu=apple-m1"
             else
               "-march=native"
