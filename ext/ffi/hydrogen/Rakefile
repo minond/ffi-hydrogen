@@ -14,7 +14,7 @@ task :compile_shared do
     " -Wmissing-declarations -Wnested-externs -Wno-unknown-pragmas"\
     " -Wpointer-arith -Wredundant-decls -Wstrict-prototypes -Wswitch-enum"\
     " -Wno-type-limits -Wno-error=incompatible-pointer-types" \
-    " -Wno-error=discarded-qualifiers"
+    " -Wno-error=ignored-qualifiers"
 
   rbconfig = RbConfig::CONFIG
 
