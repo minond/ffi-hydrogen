@@ -13,7 +13,8 @@ task :compile_shared do
     " -Wbad-function-cast -Wcast-align -Wcast-qual -Wfloat-equal"\
     " -Wmissing-declarations -Wnested-externs -Wno-unknown-pragmas"\
     " -Wpointer-arith -Wredundant-decls -Wstrict-prototypes -Wswitch-enum"\
-    " -Wno-type-limits"
+    " -Wno-type-limits -Wno-error=incompatible-pointer-types" \
+    " -Wno-error=discarded-qualifiers"
 
   rbconfig = RbConfig::CONFIG
 
